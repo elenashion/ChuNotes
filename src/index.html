@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ChuNotes</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.6.3/dist/vuetify.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@2.6.3/dist/vuetify.min.css">
+   <link rel="stylesheet" type="text/css" href="./styles.css" media="all"/>
+
+  </head>
+
+  <body>
+    <div id="app">
+      <v-app id="inspire">
+        <template>
+          <div class="app-bar-items-wrapper">
+            <v-app-bar
+            :color="color"
+            width="100%" 
+            flat
+            fixed
+            >
+            <input class="input-files-search" type="text" id="inputForSearch" placeholder="Search">
+            <button class="button-add-new-file" @click="addNewFile()"></button>
+            <div class="checked-item-title" v-if="checkedItem != null"> {{ checkedItem.title }} </div>
+            </v-app-bar>
+          </div>
+
+          <div class="row-main-items-wrapper">
+            <v-layout>
+              <v-card
+              width="350"
+              class="mx-auto"
+              >
+              <v-virtual-scroll
+              :items="items"
+              :item-height="70"
+              height="660"
+              >
+              <template v-slot="{ item }">
+                <v-list-item
+                :key="item.id"
+                 @click="openFile(item.id)"
+                 >
+                 <div class="div-in-files-list"> 
+                    <v-list-item-content>
+                      <v-list-item-title> {{ item.title }}  </v-list-item-title>
+                      <v-list-item-subtitle> {{ item.shortPreview }} </v-list-item-subtitle>
+                      <v-divider></v-divider>
+                    </v-list-item-content>
+                  </div>
+                </v-list-item>
+              </template>
+              </v-virtual-scroll>
+              </v-card>
+
+          
+              <v-card
+              width="680"
+              class="mx-auto"
+              >
+              <v-virtual-scroll
+              v-if="checkedItem != null"
+              :items="checkedItem.content"
+              :item-height="70"
+              height="660"
+              >
+              <template v-slot="{ item }">
+                <v-list-item
+                :key="checkedItem.date"
+                >
+                <div class="message-content">
+                  <v-card>
+                    <v-list-item-content>
+                      {{ item.text }}
+                    </v-list-item-content>
+                  </v-card>
+                </div>
+
+
+                </v-list-item>
+              </template>
+              </v-virtual-scroll>
+              </v-card>
+            </v-layout>
+          </div>
+        </template>
+      </v-app>
+    </div>
+
+
+  <script src='./files.js'></script>
+  </body>
+</html>

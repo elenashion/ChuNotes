@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+/*
+****************************************************************************************************
+* MAIN PART
+****************************************************************************************************
+*/
+
+
+* {box-sizing: border-box; margin: 0;}
+* {font-family: "Times New Roman", Georgia, Serif;}
+
+/*unused*/
+.application-container {
+  background-color: rgb(211, 199, 235);
+
+}
+
+
+/*
+****************************************************************************************************
+* TOOLBAR PART
+****************************************************************************************************
+*/
+
+
+.app-bar-items-wrapper {
+  height: 64px
+}
+
+.input-files-search {
+  display: block;
+  width: 25%;
+  padding: 0.375rem 0.75rem;
+  margin-top: 10px;
+  margin-left: 5px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: rgb(239, 247, 248);
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0.375rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.button-add-new-file {
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin-left: 15px;
+  margin-top: 10px;
+  background: url(../sources/add-file-icon-2.png) no-repeat;
+  background-size: 100%;
+  border-color:#212529;
+  border-width: 1px;
+}
+
+.button-add-new-file:hover {
+  background-color: rgb(197, 215, 243);
+}
+
+.checked-item-title {
+  margin-left: 30px;
+}
+
+
+/*
+****************************************************************************************************
+* DIALOGS LIST PART
+****************************************************************************************************
+*/
+
+
+.row-main-items-wrapper {
+  height: 100%;
+  margin-top: 10px;
+}
+
+.div-in-files-list {
+  text-decoration: none;
+  outline: none;
+  display: block;
+  padding: 6px 0; 
+  letter-spacing: 1px;
+  font-weight: 300;
+  margin-left: 10px;
+  color: #815b5b;
+  transition: .3s linear;
+}
+
+.v-list-item--visited  {
+  color: aquamarine
+}
+
+/* .div-in-files-list:hover {
+  color: #b99d61;
+} */
+
+
+/*
+****************************************************************************************************
+* SEPARATE DIALOG PART
+****************************************************************************************************
+*/
+
+
+.message-content {
+  margin-left: 10px;
+}
