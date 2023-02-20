@@ -38,5 +38,7 @@ const app = new Vue({
     items: [],
     checkedItem: null,
     color: 'rgb(232, 243, 247)',
+    filesEditPanelWeight: 100,
+    windowsHeights: {filesListHeight: 400, filesEditPanelHeight: 400, filesContentHeight: 100},
   }
 });
