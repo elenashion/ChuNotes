@@ -10,10 +10,40 @@
 * {box-sizing: border-box; margin: 0;}
 * {font-family: "Times New Roman", Georgia, Serif;}
 
-/*unused*/
-.application-container {
-  background-color: rgb(211, 199, 235);
+.theme--light.v-application {
+  background-color: var(--v-background-base, rgb(248, 244, 255)) !important;
+}
 
+.theme--light.v-card.lists-container {
+  background-color: var(--v-background-base, rgb(254, 253, 255)) !important;
+}
+
+.theme--light.v-list.lists-container {
+  background-color: var(--v-background-base, rgb(254, 253, 255)) !important;
+}
+
+.theme--light.v-card.message-container {
+  background-color: var(--v-background-base, rgb(247, 243, 250)) !important;
+}
+
+.theme--light.v-textarea.message-input-textarea {
+  max-width: 600px
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background:rgb(232, 232, 236);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(197, 215, 243);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(173, 187, 212);
 }
 
 
@@ -65,6 +95,7 @@
 }
 
 .checked-item-title {
+  margin-top: 10px;
   margin-left: 30px;
 }
 
@@ -111,4 +142,10 @@
 
 .message-content {
   margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.single-message-style {
+  margin-left: 10px;
+  margin-right: 10px;
 }

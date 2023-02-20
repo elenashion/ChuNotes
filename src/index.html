@@ -31,12 +31,13 @@
             <v-layout>
               <v-card
               width="350"
-              class="mx-auto"
+              class="mx-auto lists-container"
               >
               <v-virtual-scroll
               :items="items"
               :item-height="70"
-              height="660"
+              :height="windowsHeights.filesListHeight"
+              max-width="350"
               >
               <template v-slot="{ item }">
                 <v-list-item
@@ -56,32 +57,46 @@
               </v-card>
 
           
-              <v-card
-              width="680"
-              class="mx-auto"
+              <v-card>
+              :width="filesEditPanelWeight"
+              class="mx-auto lists-container"
               >
-              <v-virtual-scroll
+              <v-list 
               v-if="checkedItem != null"
-              :items="checkedItem.content"
-              :item-height="70"
-              height="660"
+              :height="windowsHeights.filesContentHeight"
+              style="overflow-y: scroll"
+              class="lists-container"
               >
-              <template v-slot="{ item }">
                 <v-list-item
+                v-for="item in checkedItem.content"
                 :key="checkedItem.date"
                 >
                 <div class="message-content">
                   <v-card>
+                    <div class="single-message-style">
                     <v-list-item-content>
                       {{ item.text }}
                     </v-list-item-content>
+                  </div>
                   </v-card>
                 </div>
-
-
                 </v-list-item>
-              </template>
-              </v-virtual-scroll>
+              </v-list>
+
+              <v-card
+              v-if="checkedItem != null"
+              :height="windowsHeights.filesEditPanelHeight"
+              class="message-container"
+              >
+              <v-textarea
+              :no-resize="true"
+              :outlined="true"
+              background-color="white"
+              placeholder="Enter the text..."
+              class="message-input-textarea"
+              >
+              </v-textarea>
+              </v-card>
               </v-card>
             </v-layout>
           </div>
