@@ -16,10 +16,10 @@
         <template>
           <div class="app-bar-items-wrapper">
             <v-app-bar
-            :color="color"
             width="100%" 
             flat
             fixed
+            class="app-bar-items"
             >
             <input class="input-files-search" type="text" id="inputForSearch" placeholder="Search">
             <button class="button-add-new-file" @click="addNewFile()"></button>
@@ -41,8 +41,8 @@
               >
               <template v-slot="{ item }">
                 <v-list-item
-                :key="item.id"
-                 @click="openFile(item.id)"
+                :key="item.title"
+                 @click="openFile(item.title)"
                  >
                  <div class="div-in-files-list"> 
                     <v-list-item-content>
@@ -73,11 +73,9 @@
                 >
                 <div class="message-content">
                   <v-card>
-                    <div class="single-message-style">
-                    <v-list-item-content>
-                      {{ item.text }}
-                    </v-list-item-content>
-                  </div>
+                    <div>
+                    <v-card-text class="single-message-text-content-style">{{ item.text }}</v-card-text>
+                    </div>
                   </v-card>
                 </div>
                 </v-list-item>
@@ -88,14 +86,21 @@
               :height="windowsHeights.filesEditPanelHeight"
               class="message-container"
               >
+              <v-layout
+              fill-height
+              align-center
+              justify-center>
               <v-textarea
               :no-resize="true"
               :outlined="true"
               background-color="white"
               placeholder="Enter the text..."
+              v-model="addingMessage"
               class="message-input-textarea"
               >
               </v-textarea>
+              <button class="button-add-text-into-file" @click="addTextIntoFile()"></button>
+              </v-layout>
               </v-card>
               </v-card>
             </v-layout>
@@ -106,5 +111,6 @@
 
 
   <script src='./files.js'></script>
+  <script src='./helper.js'></script>
   </body>
 </html>

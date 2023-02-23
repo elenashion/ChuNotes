@@ -17,12 +17,27 @@ const app = new Vue({
       this.items = await window.filesApi.getListOfFiles();
     },
 
-    async openFile (id) {
-      this.checkedItem = await window.filesApi.openFile(id);
+    async openFile (title) {
+      this.checkedItem = await window.filesApi.openFile(title);
     },
 
     async addNewFile () {
       // TODO
+    },
+
+    async addTextIntoFile () {
+      let text = trimTextBeforeSave(this.addingMessage);
+      if (text === '')
+      {
+        return;
+      }
+      this.checkedItem = await window.filesApi.addTextIntoFile(
+        this.checkedItem.title, text);
+      this.addingMessage = '';
+    },
+
+    async resetCheckedItem () {
+      this.checkedItem = null;
     },
 
     async onResize () {
@@ -37,7 +52,7 @@ const app = new Vue({
   data: {
     items: [],
     checkedItem: null,
-    color: 'rgb(232, 243, 247)',
+    addingMessage: "",
     filesEditPanelWeight: 100,
     windowsHeights: {filesListHeight: 400, filesEditPanelHeight: 400, filesContentHeight: 100},
   }
