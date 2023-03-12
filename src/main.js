@@ -77,7 +77,7 @@ async function fillTestData () {
     dataCreated: '',
     dateLastUpdated: '',
     title: 'SomeTitle1',
-    shortPreview: 'Short preview',
+    shortPreview: 'Short preview Some text to test this function Some text to test this function Some text to test this function',
     content: [
       {date: '', text: 'Some text to test this function'},
       {date: '', text: 'Some text to test this function 2'},

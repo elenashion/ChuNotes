@@ -3,66 +3,43 @@
   "productName": "ChuNotes",
   "version": "1.0.0",
   "description": "Messenger-like notebook",
-  "main": "src/main.js",
+  "main": "dist/src/background/index.js",
   "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
-    "publish": "electron-forge publish",
-    "lint": "eslint src --color"
+    "compile": "vue-tsc --noEmit && vite build",
+    "serve": "vite",
+    "build": "npm run compile -- --outDir docs/webapp",
+    "lint": "eslint src --color",
+    "electron:compile": "tsc && tsc-alias && webpack",
+    "electron:serve": "npm run electron:compile && concurrently --kill-others vite \"electron .\" \"tsc --sourceMap -w\" \"tsc-alias -w\"",
+    "electron:build": "npm run compile && npm run electron:compile && electron-builder"
   },
   "author": "elena_shion",
   "license": "MIT",
-  "config": {
-    "forge": {
-      "make_targets": {
-        "win32": [
-          "squirrel"
-        ],
-        "darwin": [
-          "zip"
-        ],
-        "linux": [
-          "deb",
-          "rpm"
-        ]
-      },
-      "electronPackagerConfig": {
-        "packageManager": "npm"
-      },
-      "electronWinstallerConfig": {
-        "name": "chunotes"
-      },
-      "github_repository": {
-        "owner": "",
-        "name": ""
-      },
-      "windowsStoreConfig": {
-        "packageName": "",
-        "name": "chunotes"
-      }
-    }
-  },
   "dependencies": {
-    "bootstrap": "^5.2.3",
-    "electron-compile": "^6.4.4",
-    "electron-squirrel-startup": "^1.0.0"
-
+    "vue": "^3.2.25"
   },
   "devDependencies": {
-    "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "electron": "^22.1.0",
+    "@types/node": "^18.15.0",
+    "@vue/tsconfig": "^0.1.3",
+    "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.0",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "@vue/eslint-config-typescript": "^11.0.2",
+    "concurrently": "^7.5.0",
+    "electron": "^22.0.0",
     "electron-builder": "^23.6.0",
-    "electron-forge": "^5.2.4",
-    "electron-prebuilt-compile": "8.2.0",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^15.1.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.32.2",
-    "playwright": "^1.30.0",
-    "rimraf": "^4.1.2"
+    "electron-devtools-installer": "^3.2.0",
+    "eslint": "^8.26.0",
+    "eslint-import-resolver-typescript": "^3.5.2",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.7.0",
+    "terser-webpack-plugin": "^5.3.6",
+    "tsc-alias": "^1.7.0",
+    "typescript": "^4.6.4",
+    "vite": "^4.0.2",
+    "vue-tsc": "^1.0.9",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.0"
   }
 }
