@@ -4,6 +4,7 @@
     "target": "ESNext",
     "module": "CommonJS",
     "moduleResolution": "Node",
+    "useDefineForClassFields": true,
     "importHelpers": true,
     "strict": true,
     "isolatedModules": false,
@@ -16,15 +17,20 @@
     "baseUrl": ".",
     "paths": {
       "@/*": [
-        "/src/*"
+        "src/*"
       ]
     }
   },
+  "lib": [
+    "esnext",
+    "dom"
+  ],
 
   "include": [
-    "src/**/*", 
+    "src/**/*.d.ts",
     "src/**/*.vue", 
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "src/**/*.tsx"
   ],
 
   "exclude": [

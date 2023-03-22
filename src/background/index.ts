@@ -1,7 +1,7 @@
 "use strict";
 
 import { app, protocol, BrowserWindow } from "electron";
-import * as path from 'path';
+import path from 'path';
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -15,19 +15,22 @@ async function createWindow () {
   mainWindow = new BrowserWindow({
     webPreferences: {
       contextIsolation: true,
+      nodeIntegration: true,
       preload: path.join(__dirname, 'renderer/preload.js')
     },
     width: 1024,
     height: 800,
   });
 
-  mainWindow.loadURL(
-    isDev ?
-    "http://localhost:3000" :
-    path.join(__dirname, 'index.html')
-    );
+  mainWindow.loadURL("http://localhost:5173");
+
+  // mainWindow.loadFile(
+  //   path.join(__dirname, '../../../index.html')
+  // );
   
-  mainWindow.webContents.openDevTools();
+  if (isDev) {
+    mainWindow.webContents.openDevTools();
+  }
   
   mainWindow.on('closed', () => {
     mainWindow = null;
@@ -36,7 +39,6 @@ async function createWindow () {
   return mainWindow;
 };
 
-  
 app.whenReady().then(() => {
     createWindow();
   
@@ -51,4 +53,3 @@ app.on('window-all-closed', () => {
   }
 });
 
-export default {};

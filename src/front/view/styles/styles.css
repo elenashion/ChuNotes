@@ -14,21 +14,13 @@ html {
   overflow-y: hidden !important;
 }
 
-.theme--light.v-application {
+.v-theme--light.v-application {
   background-color: var(--v-background-base, rgb(248, 244, 255)) !important;
 }
 
-.theme--light.v-card.lists-container {
-  background-color: var(--v-background-base, rgb(254, 253, 255)) !important;
-}
 
-.theme--light.v-list.lists-container {
-  background-color: var(--v-background-base, rgb(254, 253, 255)) !important;
-}
 
-.theme--light.v-card.message-container {
-  background-color: var(--v-background-base, rgb(247, 243, 250)) !important;
-}
+
 
 ::-webkit-scrollbar {
   width: 7px;
@@ -58,15 +50,14 @@ html {
   height: 64px;
 }
 
-.theme--light.v-app-bar.app-bar-items {
+.v-theme--light.v-app-bar.app-bar-items {
   background-color: rgb(217, 207, 240) !important;
-
 }
 
 .input-files-search {
   display: block;
-  width: 30%;
-  max-width: 300px;
+  width: 27%;
+  /* max-width: 300px; */
   padding: 0.375rem 0.75rem;
   margin-top: 10px;
   margin-left: 5px;
@@ -89,6 +80,7 @@ html {
   width: 30px;
   height: 30px;
   margin-left: 15px;
+  margin-right: 15px;
   margin-top: 10px;
   background: url(../sources/add-file-icon-2.png) no-repeat;
   background-size: 100%;
@@ -100,14 +92,22 @@ html {
   background-color: rgb(197, 215, 243);
 }
 
+.v-theme--light.v-card.opened-dialog-title-card {
+  height: 50px;
+  width: 50%;
+  margin-left: 20px;
+  background-color: var(--v-background-base, rgb(241, 238, 243)) !important;
+}
+
 .checked-item-title {
-  margin-top: 10px;
-  margin-left: 30px;
+  /* margin-top: 10px; */
+  margin-left: 15px;
+  margin-right: 15px;
   text-decoration: none;
   outline: none;
   display: block;
-  padding: 6px 0; 
-  letter-spacing: 1px;
+  padding: 10px 0; 
+  letter-spacing: 0.7px;
   font-weight: 300;
   font-size: large;
   color: #815b5b;
@@ -121,6 +121,13 @@ html {
 ****************************************************************************************************
 */
 
+
+.v-theme--light.v-card.lists-container {
+  background-color: var(--v-background-base, rgb(254, 253, 255)) !important;
+  display: flex !important;
+  justify-content: flex-start !important;
+  margin-left: 5px !important;
+}
 
 .row-main-items-wrapper {
   height: 100%;
@@ -155,6 +162,12 @@ html {
 */
 
 
+.v-theme--light.v-card.message-container {
+  background-color: var(--v-background-base, rgb(247, 243, 250)) !important;
+  display: flex;
+  align-items: center;
+}
+
 .message-content {
   margin-left: 10px;
   margin-bottom: 10px;
@@ -171,9 +184,8 @@ html {
 }
 
 
-/* TODO: Add controlling to "height" size - if window small it looks terrible */ 
-.theme--light.v-textarea.message-input-textarea {
-  max-width: 600px;
+.v-theme--light.v-input.message-input-textarea {
+  max-width: 100px !important;
   margin-left: 20px;
   margin-right: 20px;
   margin-top: 30px;
