@@ -1,11 +1,21 @@
 import { contextBridge, ipcRenderer } from 'electron';
+import type { API } from "./ipc/api";
+import type { Dialog, Item } from '../entities';
+import { Background } from './ipc/channel';
 
-contextBridge.exposeInMainWorld(
-  'filesApi', {
-    openFile: async (id: number) => await ipcRenderer.invoke('open-file', id),
-    getListOfFiles: async () => await ipcRenderer.invoke('get-list-of-files'),
-    addNewFile: async (id: number) => await ipcRenderer.invoke('add-new-file', id),
-    addTextIntoFile: async (id: number, text: string) => await ipcRenderer.invoke('add-text-into-file', id, text),
+const api: API = {
+  async openDialog(id: number): Promise<Dialog> {
+    return await ipcRenderer.invoke(Background.OPEN_DIALOG, id);
+  },
+  async getListOfDialogs(): Promise<Item[]> {
+    return await ipcRenderer.invoke(Background.GET_LIST_OF_DIALOGS);
+  },
+  async addNewDialog(title: string): Promise<Dialog> {
+    return await ipcRenderer.invoke(Background.ADD_NEW_DIALOG, title);
+  },
+  async addMessage(dialogId: number, text: string): Promise<void> {
+    ipcRenderer.invoke(Background.ADD_MESSAGE, dialogId, text);
+  },
+}
 
-  }
-);
+contextBridge.exposeInMainWorld("chuNotesAPI", api);

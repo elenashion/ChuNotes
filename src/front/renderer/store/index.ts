@@ -1,10 +1,10 @@
 import { reactive, UnwrapNestedRefs } from 'vue';
-import { DialogsManager } from './dialog';
+// import { DialogsManager } from './dialog';
 
 
 class Store {
     private _reactive: UnwrapNestedRefs<Store>;
-    private dialogsManager = new DialogsManager();
+    // private dialogsManager = new DialogsManager();
 
     constructor() {
         const refs = reactive(this);
@@ -13,7 +13,7 @@ class Store {
     };
 
     get reactive(): UnwrapNestedRefs<Store> {
-      ;  return this._reactive;
+      return this._reactive;
     }
 
     addMessageIntoDialog(message: string) {

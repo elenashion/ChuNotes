@@ -1,12 +1,12 @@
 productName: ElectronShogi
 extraMetadata:
-  main: dist/packed/background.js
+  main: dist/packed/index.js
+preload: dist/packed/preload.js
 extends: null
 files:
   - dist/index.html
   - dist/packed
   - "!node_modules/**/*"
-afterPack: scripts/remove-unused-locales.js
 nsis:
   allowElevation: false
   packElevateHelper: false

@@ -1,42 +1,64 @@
 <template>
     <div id="app" >
       <v-app id="inspire">
-        <MainAppBar :openedDialog="openedDialog"/>
+        <MainAppBar 
+        :openedDialog="openedDialog"/>
 
       <v-layout>
-        <FileListLayout @openedDialogChanged="reloadDialog"/>
-        <DialogLayout :openedDialog="openedDialog"/>
+        <ItemsListLayout 
+        @openedDialogChanged="reloadDialog" 
+        @itemsUpdated = "itemsUpdated"
+        :needUpdateItemsList="needUpdateItemsList"/>
+        
+        <DialogLayout 
+        @messageSended="reloadThisDialogWithCheck" 
+        :openedDialog="openedDialog"/>
       </v-layout>
       </v-app>
     </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
+  import { api } from "@/background/renderer/ipc/api"
+  import { Ref, defineComponent, ref } from "vue";
   import MainAppBar from "./main/MainAppBar.vue";
-  import FileListLayout from "./main/FileListLayout.vue";
+  import ItemsListLayout from "./main/ItemsListLayout.vue";
   import DialogLayout from "./main/DialogLayout.vue";
-  import { Dialog, OpenedDialog } from "@/background/entities";
 
   export default defineComponent({
     name: "App",
     components: {
         MainAppBar,
-        FileListLayout,
+        ItemsListLayout,
         DialogLayout
     },
     data() {
+      const openedDialog: Ref = ref(null);
+      const needUpdateItemsList: Ref = ref(false);
+
       return {
-        openedDialog: new OpenedDialog()
+        openedDialog,
+        needUpdateItemsList
       }
     },
     methods: {
-      reloadDialog(id: number, temporaryMessage: string) {
-        this.openedDialog.dialog = new Dialog(id, "New dialog", new Date());
-        this.openedDialog.dialog.addNewMessage("Test message 1");
-        this.openedDialog.dialog.addNewMessage("Test message 2");
-        this.openedDialog.dialog.addNewMessage("Test message 3");
+      reloadThisDialogWithCheck(reload: boolean) {
+        if (reload)
+        {
+          this.reloadDialog(this.openedDialog.id);
+          this.openedDialog.temporaryMessage = '';
+          this.needUpdateItemsList = true;
+        }
+      },
 
+      itemsUpdated() {
+        this.needUpdateItemsList = false;
+      },
+
+      reloadDialog(id: number) {
+        api.openDialog(id).then((dialog) => {
+          this.openedDialog = dialog;
+        });
       }
     }
   })

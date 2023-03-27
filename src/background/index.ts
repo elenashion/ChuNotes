@@ -2,6 +2,7 @@
 
 import { app, protocol, BrowserWindow } from "electron";
 import path from 'path';
+import { setup } from "./renderer/ipc/ipc";
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -27,6 +28,8 @@ async function createWindow () {
   // mainWindow.loadFile(
   //   path.join(__dirname, '../../../index.html')
   // );
+
+  setup(mainWindow);
   
   if (isDev) {
     mainWindow.webContents.openDevTools();
@@ -39,7 +42,16 @@ async function createWindow () {
   return mainWindow;
 };
 
+async function installElectronDevtools() {
+  const installer = await import("electron-devtools-installer");
+  await installer.default(installer.VUEJS3_DEVTOOLS);
+}
+
 app.whenReady().then(() => {
+  if (isDev)
+  {
+    installElectronDevtools();
+  }
     createWindow();
   
     app.on('activate', function () {

@@ -2,36 +2,46 @@ import type { Item } from "./item";
 import { Message } from "./message";
 
 export class Dialog {
-    private messages = new Set<Message>;
-    public temporaryMessage?: String;
+    private messages = new MessagesSet();
+    private dateLastUpdated = new Date();
+    public temporaryMessage: String = "";
 
-    constructor(public id: number, public title: string, public dateLastUpdated: Date) {}
+    constructor(public id: number, public title: string) {}
 
     addNewMessage(text: string): Message {
-        const newMessage = new Message(new Date(), text);
-        this.messages.add(newMessage);
-        this.dateLastUpdated = newMessage.date;
+        const lastUpdated = new Date();
+        const newMessage = new Message(lastUpdated, text);
+        this.messages.addNew(newMessage);
+        this.dateLastUpdated = lastUpdated;
         return newMessage;
     };
 
     getMessages(): Message[] {
         return Array.from(this.messages);
-    }
+    };
 
+    getLastMessage(): Message | null | undefined {
+        return this.messages.last;
+    };
+
+}
+
+class MessagesSet extends Set {
+    public last: Message | null | undefined;
+    
+    addNew(value: Message): void {
+        super.add(value);
+        this.last = value;
+    };
 }
 
 export class OpenedDialog {
     constructor(
         public item?: Item,
-        public dialog?: Dialog, 
-        public temporaryMessage?: string
+        public dialog?: Dialog,
     ) {}
 
-    updateOpenedDialog(newDialog?: Dialog, newTemporaryMessage?: string): void {
-        if (this.dialog)
-        {
-            this.dialog.temporaryMessage = newTemporaryMessage;
-        }
+    updateOpenedDialog(newDialog?: Dialog): void {
         this.dialog = newDialog;
-    }
+    };
 }
